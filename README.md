@@ -7,8 +7,6 @@
 
 ## Contributors
 
-<br />
-<br>
 Roberto Rodriguez
 [<img align="left" alt="Roberto's github" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/globe.svg" />][git-rob]
 [<img align="left" alt="Roberto's linkedin' | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />][linkedin-rob]

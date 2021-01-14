@@ -1,4 +1,4 @@
-# The Bone Yard -- backend-repo
+# The Bone Yard -- backend-repo (Rails)
 <br/>The idea behind this application is to address the issue of there not being an app currently that allows a dog owner to set up play dates for their dog, with other dogs in the area, in a safe and secure way.<br/><br/>The main application can be found [here](https://the-bone-yard-fe.herokuapp.com/#/). As of right now a user can navigate to that website and search for dog parks that are near their current location or a specified city/state. The idea is to eventually be able to set play-dates with other owners in a safe way.
 
 ## Purpose
@@ -7,9 +7,6 @@
 
 ## Contributors
 
-Judtih Pillado
-[<img align="left" alt="Judith's GitHub" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/globe.svg" />][git-jud]
-[<img align="left" alt="Judith's linkedIn | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />][linkedin-jud]
 <br />
 <br>
 Roberto Rodriguez

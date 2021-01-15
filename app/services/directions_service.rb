@@ -12,4 +12,9 @@ class DirectionsService
     end
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.only_narration(start, finish)
+    directions = get_directions(start, finish)
+    directions[:route][:legs][0][:maneuvers].map{ |step| step[:narrative]}
+  end
 end

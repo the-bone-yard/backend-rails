@@ -65,7 +65,6 @@ RSpec.describe 'Map API call' do
   end
 
   it 'can consume an API using DirectionsService' do
-
     start = '39.7392,-104.9903'
     finish = '40.0150,-105.2705'
 
@@ -82,5 +81,14 @@ RSpec.describe 'Map API call' do
     expect(result[:route][:legs][0][:maneuvers][0].keys.include?(:distance)).to eq(true)
     expect(result[:route][:legs][0][:maneuvers][0].keys.include?(:streets)).to eq(true)
     expect(result[:route][:legs][0][:maneuvers][0].keys.include?(:narrative)).to eq(true)
+  end
+
+  it 'can format directions API to match FE needs' do
+    start = '39.7392,-104.9903'
+    finish = '40.0150,-105.2705'
+
+    result = DirectionsService.only_narration(start, finish)
+
+    expect(result).to be_an(Array)
   end
 end

@@ -30,4 +30,20 @@ RSpec.describe 'Places API' do
       end
     end
   end
+
+  it 'can get Google Place API using PlaceService using coordinates' do
+    coords = '39.7392,-104.9903'
+    data = {coords: coords, radius: 48000}
+    result = PlaceService.get_parks(data)
+    expect(result).to be_an(Array)
+
+    park_keys = %i(business_status geometry icon name vicinity)
+
+
+    result.each do |park|
+      park_keys.each do |key|
+        expect(park.keys.include?(key)).to be_truthy
+      end
+    end
+  end
 end

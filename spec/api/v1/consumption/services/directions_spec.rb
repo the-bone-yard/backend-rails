@@ -70,17 +70,17 @@ RSpec.describe 'Map API call' do
     finish = '40.0150,-105.2705'
 
     result = DirectionsService.get_directions(start, finish)
-    expect(result.keys).to eq(%w[route info])
-    expect(result['route'].keys.length).to eq(23)
-    expect(result['route'].keys.include?('realTime')).to eq(true)
-    expect(result['route'].keys.include?('legs')).to eq(true)
-    expect(result['route'].keys.include?('fuelUsed')).to eq(true)
-    expect(result['route'].keys.include?('options')).to eq(true)
-    expect(result['route'].keys.include?('time')).to eq(true)
+    expect(result.keys).to eq(%i[route info])
+    expect(result[:route].keys.length).to eq(23)
+    expect(result[:route].keys.include?(:realTime)).to eq(true)
+    expect(result[:route].keys.include?(:legs)).to eq(true)
+    expect(result[:route].keys.include?(:fuelUsed)).to eq(true)
+    expect(result[:route].keys.include?(:options)).to eq(true)
+    expect(result[:route].keys.include?(:time)).to eq(true)
 
-    expect(result['route']['legs'][0].keys.include?('maneuvers')).to eq(true)
-    expect(result['route']['legs'][0]['maneuvers'][0].keys.include?('distance')).to eq(true)
-    expect(result['route']['legs'][0]['maneuvers'][0].keys.include?('streets')).to eq(true)
-    expect(result['route']['legs'][0]['maneuvers'][0].keys.include?('narrative')).to eq(true)
+    expect(result[:route][:legs][0].keys.include?(:maneuvers)).to eq(true)
+    expect(result[:route][:legs][0][:maneuvers][0].keys.include?(:distance)).to eq(true)
+    expect(result[:route][:legs][0][:maneuvers][0].keys.include?(:streets)).to eq(true)
+    expect(result[:route][:legs][0][:maneuvers][0].keys.include?(:narrative)).to eq(true)
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlaceService
   def self.conn
     Faraday.new('https://maps.googleapis.com/maps/api/')

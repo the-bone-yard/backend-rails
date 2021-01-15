@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DirectionsService
   def self.conn
     Faraday.new('https://www.mapquestapi.com')
@@ -15,6 +17,6 @@ class DirectionsService
 
   def self.only_narration(start, finish)
     directions = get_directions(start, finish)
-    directions[:route][:legs][0][:maneuvers].map{ |step| step[:narrative]}
+    directions[:route][:legs][0][:maneuvers].map { |step| step[:narrative] }
   end
 end

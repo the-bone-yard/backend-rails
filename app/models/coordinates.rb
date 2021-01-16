@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Coordinates < ApplicationRecord
   validates_presence_of :city, :area, :lat, :lng
 

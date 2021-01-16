@@ -48,12 +48,16 @@ RSpec.describe 'GeoCode API call' do
     end
   end
 
-  it 'can convert city/state to coordinates using CoordinateService' do
+  it 'can convert city/state to coordinates using .get_coords' do
     city = 'denver,co'
 
-    result = CoordinateService.convert(city)
-    expect(result).to be_a(String)
-    expect(result.split(', ')[0].to_f).to be_a(Float)
-    expect(result.split(', ')[1].to_f).to be_a(Float)
+    result = CoordinateService.get_coords(city)
+    expect(result).to be_a(Coordinates)
+    expect(result.city).to eq('denver')
+    expect(result.area).to eq('co')
+    expect(result.lat.to_f).to eq(39.738453)
+    expect(result.lng.to_f).to eq(-104.984853)
+    result2 = CoordinateService.get_coords(city)
+    expect(result2).to be_a(Coordinates)
   end
 end

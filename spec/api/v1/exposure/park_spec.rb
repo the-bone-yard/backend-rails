@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Parks' do
@@ -5,6 +7,7 @@ RSpec.describe 'Parks' do
     url = ENV['RAILS_ENGINE_DOMAIN'] + uri
     Faraday.new(url)
   end
+
   it 'can create a Park through API' do
     body = {
       'name': 'Georges Park',
@@ -30,5 +33,18 @@ RSpec.describe 'Parks' do
     expect(json['email']).to eq(body[:email])
     expect(json['lat']).to eq(body[:lat])
     expect(json['lng']).to eq(body[:lng])
+    @@id = json['id']
+  end
+
+  it 'can delete a Park with the appropriate API key' do
+    body = {
+      'id': @@id,
+      'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
+    }
+
+    response = conn('/api/v1/park').delete do |req|
+      req.body = body
+    end
+    expect(response.status).to eq(204)
   end
 end

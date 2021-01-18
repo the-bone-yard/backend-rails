@@ -16,7 +16,17 @@ module Api
         end
       end
 
+      def index
+        if Park.check_key(all_park_params[:api_key])
+          render json: ParkSerializer.new(Park.all)
+        end
+      end
+
       private
+
+      def all_park_params
+        params.permit(:api_key)
+      end
 
       def destroy_params
         params.permit(:api_key, :id)

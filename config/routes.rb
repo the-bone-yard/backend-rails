@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'park/', to: 'park#create'
       delete 'park', to: 'park#destroy'
+      get 'park/all', to: 'park#index'
     end
   end
 end

@@ -8,5 +8,8 @@ Rails.application.routes.draw do
       delete 'park', to: 'park#destroy'
       get 'park/all', to: 'park#index'
     end
+    namespace :v2 do
+      get 'directions', to: 'search#show'
+    end
   end
 end

@@ -71,10 +71,10 @@ RSpec.describe 'Parks' do
 
     json = JSON.parse(response.body, symbolize_names: true)
 
-    expect(json.keys).to eq(%i(data))
-    expect(json[:data][0].keys).to eq(%i(id type attributes))
+    expect(json.keys).to eq(%i[data])
+    expect(json[:data][0].keys).to eq(%i[id type attributes])
     json[:data].each do |park|
-      expect(park[:attributes].keys).to eq(%i(id name email formatted_address lat lng photo rating))
+      expect(park[:attributes].keys).to eq(%i[id name email formatted_address lat lng photo rating])
     end
   end
 end

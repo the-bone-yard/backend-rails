@@ -18,7 +18,7 @@ RSpec.describe 'Parks' do
       'email': '123@email.com',
       'lat': '123.4456',
       'lng': '-104.7764',
-      'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
+      'api_key': ENV['API']
     }
 
     response = conn('/api/v1/park').post do |request|
@@ -39,7 +39,7 @@ RSpec.describe 'Parks' do
   it 'can delete a Park with the appropriate API key' do
     body = {
       'id': @@id,
-      'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
+      'api_key': ENV['API']
     }
 
     response = conn('/api/v1/park').delete do |req|
@@ -58,14 +58,14 @@ RSpec.describe 'Parks' do
       'email': '123@email.com',
       'lat': '123.4456',
       'lng': '-104.7764',
-      'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
+      'api_key': ENV['API']
     }
     conn('/api/v1/park').post do |request|
       request.body = body1
     end
 
     body2 = {
-      'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
+      'api_key': ENV['API']
     }
 
     response = conn('/api/v1/park/all').get do |req|

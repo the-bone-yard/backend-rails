@@ -9,11 +9,10 @@ RSpec.describe 'User API' do
     body = {
       email: '222@email.com',
       password: '222',
-      api_key: '2gymzMNPQSJqrkExBLz9Mgtt'
+      api_key: ENV['API']
     }
     response = conn('/api/v1/users').post do |req|
       req.params[:body] = body
-      req.params[:api_key] = '2gymzMNPQSJqrkExBLz9Mgtt'
     end
 
   end

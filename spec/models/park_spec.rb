@@ -28,7 +28,7 @@ RSpec.describe User, type: :model do
         email: '222@email.com',
         photo: 'no photos please',
         opening_hours: 'yes',
-        api_key: '2gymzMNPQSJqrkExBLz9Mgtt'
+        api_key: ENV['API']
       }
 
       expect { Park.new_park(data) }.to change { Park.all.count }.by(1)

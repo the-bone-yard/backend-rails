@@ -21,6 +21,6 @@ RSpec.describe 'User API' do
     expect(result.keys).to eq(%i(id email password_digest api_key))
 
     response2 = conn('/api/v1/user').delete
-    expect(response2.class).to eq([])
+    expect(response2.class).to eq(Faraday::Response)
   end
 end

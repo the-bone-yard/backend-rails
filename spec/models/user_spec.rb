@@ -19,3 +19,18 @@ RSpec.describe User, type: :model do
     end
   end
 end
+
+RSpec.describe User, type: :model do
+  describe '.new_user(data)' do
+    it 'can check the api key' do
+      expect(User.all.count).to eq(0)
+      data = {
+        api_key: '2gymzMNPQSJqrkExBLz9Mgtt',
+        email: '1222@email.com',
+        password: '222'
+      }
+      User.new_user(data)
+      expect(User.all.count).to eq(1)
+    end
+  end
+end

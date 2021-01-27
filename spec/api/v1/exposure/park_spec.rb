@@ -73,7 +73,7 @@ RSpec.describe 'Parks' do
     end
 
     json = JSON.parse(response.body, symbolize_names: true)
-    require "pry"; binding.pry
+
     expect(json.keys).to eq(%i[data])
     expect(json[:data][0].keys).to eq(%i[id type attributes])
     json[:data].each do |park|

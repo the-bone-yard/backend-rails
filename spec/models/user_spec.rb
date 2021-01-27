@@ -19,3 +19,15 @@ RSpec.describe User, type: :model do
     end
   end
 end
+
+RSpec.describe User, type: :model do
+  describe '.check_key()' do
+    it 'can check API key and create a Park if validated' do
+
+    end
+
+    it 'can check API key and send back an error if not validated' do
+
+    end
+  end
+end

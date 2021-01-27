@@ -49,7 +49,7 @@ RSpec.describe 'Parks' do
   end
 
   it 'can get all Parks with API key' do
-    body = {
+    body1 = {
       'name': 'Georges Park',
       'formatted_address': '1234 Not a Street Road, Denver, CO 80210',
       'opening_hours': 'true',
@@ -60,13 +60,16 @@ RSpec.describe 'Parks' do
       'lng': '-104.7764',
       'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
     }
+    conn('/api/v1/park').post do |request|
+      request.body = body1
+    end
 
-    body = {
+    body2 = {
       'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
     }
 
     response = conn('/api/v1/park/all').get do |req|
-      req.body = body
+      req.body = body2
     end
 
     json = JSON.parse(response.body, symbolize_names: true)

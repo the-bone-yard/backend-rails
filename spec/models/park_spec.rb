@@ -14,3 +14,20 @@ RSpec.describe Park, type: :model do
     it { should validate_presence_of :lng }
   end
 end
+
+RSpec.describe User, type: :model do
+  describe '.check_key()' do
+    it 'can check API key and create a Park if validated' do
+      expect(Park.all).to be_empty
+      data = {
+        'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
+      }
+      Park.new_park(data)
+      require "pry"; binding.pry
+    end
+
+    it 'can check API key and send back an error if not validated' do
+
+    end
+  end
+end

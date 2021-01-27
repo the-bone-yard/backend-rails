@@ -20,14 +20,36 @@ RSpec.describe User, type: :model do
     it 'can check API key and create a Park if validated' do
       expect(Park.all).to be_empty
       data = {
-        'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
+        formatted_address: '1234 Nope',
+        name: 'The Dude Ranch',
+        rating: '33',
+        lat: '33.098',
+        lng: '-104.55',
+        email: '222@email.com',
+        photo: 'no photos please',
+        opening_hours: 'yes',
+        api_key: '2gymzMNPQSJqrkExBLz9Mgtt'
       }
-      Park.new_park(data)
-      require "pry"; binding.pry
+
+      expect { Park.new_park(data) }.to change { Park.all.count }.by(1)
     end
 
     it 'can check API key and send back an error if not validated' do
+      expect(Park.all).to be_empty
+      data = {
+        formatted_address: '1234 Nope',
+        name: 'The Dude Ranch',
+        rating: '33',
+        lat: '33.098',
+        lng: '-104.55',
+        email: '222@email.com',
+        photo: 'no photos please',
+        opening_hours: 'yes',
+        api_key: '2'
+      }
+      result = Park.new_park(data)
 
+      expect(result).to eq('API KEY ERROR')
     end
   end
 end

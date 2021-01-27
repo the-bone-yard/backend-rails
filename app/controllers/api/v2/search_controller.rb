@@ -6,6 +6,8 @@ module Api
       def show
         if Park.check_key(params['api_key'])
           render json: {'narration': DirectionsService.only_narration(params['current'], params['to'])}
+        else
+          render json: {'API KEY ERROR'}
         end
       end
     end

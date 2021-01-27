@@ -12,4 +12,5 @@ Rails.application.routes.draw do
       get 'directions', to: 'search#show'
     end
   end
+  get '/', to: 'welcome#index'
 end

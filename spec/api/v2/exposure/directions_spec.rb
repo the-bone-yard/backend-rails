@@ -1,5 +1,7 @@
 # frozen_string_literal: true
-# testing that directions can be exposed, i.e.; an API call can be made to this app and be given directions
+
+# testing that directions can be exposed, i.e.; an API call
+# can be made to this app and be given directions
 require 'rails_helper'
 
 RSpec.describe 'Directions' do

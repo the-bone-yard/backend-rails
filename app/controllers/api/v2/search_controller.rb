@@ -6,8 +6,6 @@ module Api
       def show
         if params['api_key'] == ENV['API']
           render json: DirectionsService.only_narration(params['current'], params['to']).to_json
-        else
-          render json: {'API KEY ERROR'}.to_json 
         end
       end
     end

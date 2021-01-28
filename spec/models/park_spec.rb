@@ -19,6 +19,7 @@ RSpec.describe User, type: :model do
   describe '.check_key()' do
     it 'can check API key and create a Park if validated' do
       expect(Park.all).to be_empty
+
       data = {
         formatted_address: '1234 Nope',
         name: 'The Dude Ranch',

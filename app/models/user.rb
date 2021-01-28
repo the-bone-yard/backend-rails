@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates_uniqueness_of :email
   before_validation :set_api_key
   has_secure_password
+  has_many :parks
 
   def self.new_user(data)
     if check_key(data[:api_key])

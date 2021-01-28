@@ -9,6 +9,10 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of :password }
   end
 
+  describe 'relationships' do
+    it { should have_many :parks }
+  end
+
   describe 'api_key' do
     it 'api_key is generated and assigned upon creation' do
       user = User.create!(email: 'hello@email.com', password: 'yep')

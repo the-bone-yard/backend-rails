@@ -2,6 +2,7 @@
 
 class Park < ApplicationRecord
   validates_presence_of :name, :formatted_address, :email, :lat, :lng, :photo, :rating, :opening_hours
+  belongs_to :user
 
   def self.new_park(data)
     if check_key(data[:api_key])

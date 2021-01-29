@@ -12,7 +12,7 @@ class PlaceService
            else
              convert_city_state_to_coordiantes(data['data'])
            end
-    get_parks({ coords: info.to_s })
+    get_parks({ coords: info, radius: radius })
   end
 
   def self.convert_city_state_to_coordiantes(data)

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       post 'park/', to: 'park#create'
       delete 'park', to: 'park#destroy'
       get 'park/all', to: 'park#index'
+      post 'user', to: 'user#create'
+      delete 'user', to: 'user#destroy'
     end
     namespace :v2 do
       get 'directions', to: 'search#show'

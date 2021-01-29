@@ -23,7 +23,7 @@ SimpleCov.start 'rails' do
   add_filter 'mailers'
   add_filter 'application_record.rb'
   add_filter 'controllers'
-  add_filter 'serializers/roadtrip_serializer.rb'
+  add_filter 'serializers/'
 end
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

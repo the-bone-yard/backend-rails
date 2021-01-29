@@ -18,7 +18,7 @@ RSpec.describe 'Parks' do
       'email': '123@email.com',
       'lat': '123.4456',
       'lng': '-104.7764',
-      'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
+      'api_key': ENV['API']
     }
 
     response = conn('/api/v1/park').post do |request|
@@ -39,7 +39,7 @@ RSpec.describe 'Parks' do
   it 'can delete a Park with the appropriate API key' do
     body = {
       'id': @@id,
-      'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
+      'api_key': ENV['API']
     }
 
     response = conn('/api/v1/park').delete do |req|
@@ -49,7 +49,7 @@ RSpec.describe 'Parks' do
   end
 
   it 'can get all Parks with API key' do
-    body = {
+    body1 = {
       'name': 'Georges Park',
       'formatted_address': '1234 Not a Street Road, Denver, CO 80210',
       'opening_hours': 'true',
@@ -58,19 +58,22 @@ RSpec.describe 'Parks' do
       'email': '123@email.com',
       'lat': '123.4456',
       'lng': '-104.7764',
-      'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
+      'api_key': ENV['API']
     }
+    conn('/api/v1/park').post do |request|
+      request.body = body1
+    end
 
-    body = {
-      'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
+    body2 = {
+      'api_key': ENV['API']
     }
 
     response = conn('/api/v1/park/all').get do |req|
-      req.body = body
+      req.body = body2
     end
 
     json = JSON.parse(response.body, symbolize_names: true)
-
+    require "pry"; binding.pry
     expect(json.keys).to eq(%i[data])
     expect(json[:data][0].keys).to eq(%i[id type attributes])
     json[:data].each do |park|

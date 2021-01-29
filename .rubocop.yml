@@ -1,0 +1,12 @@
+Documentation:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - 'app/views/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'csv/**/*'
+    - 'slate/**/*'
+    - 'vendor/bundle/**/*'
+    - 'node_modules/**/*'

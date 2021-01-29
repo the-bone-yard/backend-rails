@@ -8,6 +8,8 @@ class PlaceService
   def self.format_search_parks(data)
     if data["data"].split(',')[0].to_f != 0.0
       get_parks({coords: data['data'], radius: 48000})
+    else
+      require "pry"; binding.pry
     end
   end
 

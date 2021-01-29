@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'park/', to: 'park#create'
+      delete 'park', to: 'park#destroy'
+      get 'park/all', to: 'park#index'
+    end
+    namespace :v2 do
+      get 'directions', to: 'search#show'
     end
   end
+  get '/', to: 'welcome#index'
 end

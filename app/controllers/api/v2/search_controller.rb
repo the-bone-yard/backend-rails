@@ -10,7 +10,7 @@ module Api
       end
 
       def parks
-        render json: PlaceService.reformat_data_if_not_coordinates(location_params).to_json
+        render json: PlaceService.get_parks_nearby(location_params).to_json
       end
 
       private

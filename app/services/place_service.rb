@@ -5,14 +5,18 @@ class PlaceService
     Faraday.new('https://maps.googleapis.com/maps/api/')
   end
 
-  def self.reformat_data_if_not_coordinates(data)
-    radius = 48000
-    if data["data"].split(',')[0].to_f != 0.0
-      get_parks({coords: data['data'], radius: radius})
-    else
-      coordinate_object = CoordinateService.get_coords(data['data'])
-      get_parks({coords: "#{coordinate_object.lat},#{coordinate_object.lng}", radius: radius})
-    end
+  def self.get_parks_nearby(data)
+    radius = 48_000
+    info = if data['data'].split(',')[0].to_f != 0.0
+             data['data']
+           else
+             convert_city_state_to_coordiantes(data['data'])
+           end
+    get_parks({ coords: info.to_s })
+  end
+
+  def self.convert_city_state_to_coordiantes(data)
+    "#{CoordinateService.get_coords(data).lat},#{CoordinateService.get_coords(data).lng}"
   end
 
   def self.get_parks(info)

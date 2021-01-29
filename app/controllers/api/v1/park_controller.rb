@@ -4,8 +4,8 @@ module Api
   module V1
     class ParkController < ApplicationController
       def create
-        trip = Park.new_park(park_params)
-        render json: Park.last if trip != 'API KEY ERROR'
+        park = Park.new_park(park_params)
+        render json: Park.last if park != 'API KEY ERROR'
       end
 
       def destroy

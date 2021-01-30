@@ -16,15 +16,11 @@ describe 'api/v2/park_search' do
       request.body = body
     end
     json = JSON.parse(response.body, symbolize_names: true)
-    keys = %i[business_status geometry icon name photos place_id plus_code rating reference scope types
-              user_ratings_total vicinity]
-    json.each do |park|
-      keys.each do |keyword|
-        expect(park.keys.include?(keyword)).to eq(true)
-      end
-      expect(park[:rating].instance_of?(Float) || Integer).to eq(true)
-      expect(park[:vicinity]).to be_a(String)
-      expect(park[:business_status]).to be_a(String)
+
+    json[:parks].each do |park|
+      expect(park[:rating].instance_of?(Float)).to eq(true)
+      expect(park[:formatted_address]).to be_a(String)
+      expect(park[:photo]).to be_an(Array)
     end
   end
 
@@ -37,15 +33,21 @@ describe 'api/v2/park_search' do
       request.body = body
     end
     json = JSON.parse(response.body, symbolize_names: true)
-    keys = %i[business_status geometry icon name photos place_id plus_code rating reference scope types
-              user_ratings_total vicinity]
-    json.each do |park|
-      keys.each do |keyword|
-        expect(park.keys.include?(keyword)).to eq(true)
-      end
-      expect(park[:rating].instance_of?(Float) || Integer).to eq(true)
-      expect(park[:vicinity]).to be_a(String)
-      expect(park[:business_status]).to be_a(String)
+
+    json[:parks].each do |park|
+      expect(park[:rating].instance_of?(Float)).to eq(true)
+      expect(park[:formatted_address]).to be_a(String)
+      expect(park[:photo]).to be_an(Array)
     end
+  end
+end
+
+
+describe 'Park Serializer' do
+  it 'will format info correctly' do
+    parks_reformatted = []
+    parks = PlaceService.get_parks_nearby({'data' => 'denver,co'})
+    result = ParkSerializer.to_hash(parks)
+    expect(result).to be_a(Hash)
   end
 end

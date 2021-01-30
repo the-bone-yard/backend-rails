@@ -6,13 +6,16 @@ class PlaceService
   end
 
   def self.get_parks_nearby(data)
+    parks = []
     radius = 48_000
     info = if data['data'].split(',')[0].to_f != 0.0
              data['data']
            else
              convert_city_state_to_coordiantes(data['data'])
            end
-    get_parks({ coords: info, radius: radius })
+    result = get_parks({ coords: info, radius: radius })
+    result.each{ |park| parks << ParkObj.new(park)}
+    parks
   end
 
   def self.convert_city_state_to_coordiantes(data)

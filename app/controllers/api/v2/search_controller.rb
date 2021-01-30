@@ -10,7 +10,7 @@ module Api
       end
 
       def parks
-        render json: PlaceService.get_parks_nearby(location_params).to_json
+        render json: ParkSerializer.to_hash(PlaceService.get_parks_nearby(location_params)).to_json
       end
 
       private

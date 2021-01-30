@@ -14,7 +14,7 @@ class PlaceService
              convert_city_state_to_coordiantes(data['data'])
            end
     result = get_parks({ coords: info, radius: radius })
-    result.each{ |park| parks << ParkObj.new(park)}
+    result.each{ |park| parks << ParkNearby.new(park)}
     parks
   end
 

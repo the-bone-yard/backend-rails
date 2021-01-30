@@ -1,4 +1,4 @@
-class ParkObj
+class ParkNearby
   attr_reader :name, :formatted_address, :opening_hours, :photo, :rating
   def initialize(params = {})
     @name = params.fetch(:name)

@@ -9,15 +9,12 @@ RSpec.describe 'GeoCode API call' do
   end
 
   it 'gets coordinates of a specific location' do
-    info = 'denver,co'
-
     response = conn('/geocoding/v1/address').get do |req|
       req.params[:key] = ENV['MAP_KEY']
-      req.params[:location] = info
+      req.params[:location] = 'denver,co'
     end
     expect(response.status).to eq(200)
     json = JSON.parse(response.body)
-
     expect(json.keys).to eq(%w[info options results])
     expect(json['info'].keys).to eq(%w[statuscode copyright messages])
 
@@ -36,7 +33,7 @@ RSpec.describe 'GeoCode API call' do
       if key == 'providedLocation'
         value.each do |k, v|
           expect(k).to eq('location')
-          expect(v).to eq(info.to_s)
+          expect(v).to eq('denver,co')
         end
       else
         expect(value[0].keys.length).to eq(22)
@@ -47,7 +44,9 @@ RSpec.describe 'GeoCode API call' do
       end
     end
   end
+end
 
+describe 'GeoCode API call' do
   it 'can convert city/state to coordinates using .get_coords' do
     city = 'denver,co'
 

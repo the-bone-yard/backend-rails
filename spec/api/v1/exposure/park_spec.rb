@@ -21,9 +21,7 @@ RSpec.describe 'Parks' do
       'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
     }
 
-    response = conn('/api/v1/park').post do |request|
-      request.body = body
-    end
+    response = conn('/api/v1/park').post { |request| request.body = body }
     json = JSON.parse(response.body)
     expect(json['name']).to eq(body[:name])
     expect(json['formatted_address']).to eq(body[:formatted_address])
@@ -35,17 +33,20 @@ RSpec.describe 'Parks' do
     expect(json['lng']).to eq(body[:lng])
     @@id = json['id']
   end
-
   it 'can delete a Park with the appropriate API key' do
-    body = {
-      'id': @@id,
-      'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
-    }
+    body = { 'id': @@id, 'api_key': '2gymzMNPQSJqrkExBLz9Mgtt' }
 
     response = conn('/api/v1/park').delete do |req|
       req.body = body
     end
     expect(response.status).to eq(204)
+  end
+end
+
+describe 'Parks' do
+  def conn(uri)
+    url = ENV['RAILS_ENGINE_DOMAIN'] + uri
+    Faraday.new(url)
   end
 
   it 'can get all Parks with API key' do
@@ -61,19 +62,15 @@ RSpec.describe 'Parks' do
       'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
     }
 
-    body = {
-      'api_key': '2gymzMNPQSJqrkExBLz9Mgtt'
-    }
+    body = { 'api_key': '2gymzMNPQSJqrkExBLz9Mgtt' }
 
     response = conn('/api/v1/park/all').get do |req|
       req.body = body
     end
 
     json = JSON.parse(response.body, symbolize_names: true)
-
+    keys = %i[name email formatted_address opening_hours photo rating lat lng]
     expect(json.keys).to eq(%i[parks])
-    json[:parks].each do |park|
-      expect(park.keys).to eq(%i[name email formatted_address opening_hours photo rating lat lng])
-    end
+    json[:parks].each { |park| expect(park.keys).to eq(keys) }
   end
 end

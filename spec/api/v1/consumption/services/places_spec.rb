@@ -31,7 +31,9 @@ RSpec.describe 'Places API' do
       end
     end
   end
+end
 
+describe 'Places API' do
   it 'can get Google Place API using PlaceService using coordinates' do
     coords = '39.7392,-104.9903'
     data = { coords: coords, radius: 48_000 }

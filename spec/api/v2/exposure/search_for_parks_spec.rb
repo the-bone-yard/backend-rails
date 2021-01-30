@@ -23,7 +23,13 @@ describe 'api/v2/park_search' do
       expect(park[:photo]).to be_an(Array)
     end
   end
+end
 
+describe 'api/v2/park_search' do
+  def conn(uri)
+    url = ENV['RAILS_ENGINE_DOMAIN'] + uri
+    Faraday.new(url)
+  end
   it 'GET request shows all parks near city/state provided in body' do
     body = {
       'data': 'denver,co'
@@ -42,11 +48,9 @@ describe 'api/v2/park_search' do
   end
 end
 
-
 describe 'Park Serializer' do
   it 'will format info correctly' do
-    parks_reformatted = []
-    parks = PlaceService.get_parks_nearby({'data' => 'denver,co'})
+    parks = PlaceService.get_parks_nearby({ 'data' => 'denver,co' })
     result = ParkSerializer.to_hash(parks)
     expect(result).to be_a(Hash)
   end

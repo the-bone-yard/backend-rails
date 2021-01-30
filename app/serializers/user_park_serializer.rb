@@ -1,5 +1,6 @@
-class UserParkSerializer
+# frozen_string_literal: true
 
+class UserParkSerializer
   def self.to_hash(data)
     {
       'parks' => all_parks(data)

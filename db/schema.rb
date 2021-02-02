@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,13 +15,13 @@
 ActiveRecord::Schema.define(version: 2021_02_02_180906) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "coordinates", force: :cascade do |t|
-    t.string "city"
-    t.string "area"
-    t.string "lat"
-    t.string "lng"
+  create_table 'coordinates', force: :cascade do |t|
+    t.string 'city'
+    t.string 'area'
+    t.string 'lat'
+    t.string 'lng'
   end
 
   create_table "parks", force: :cascade do |t|
@@ -35,10 +37,10 @@ ActiveRecord::Schema.define(version: 2021_02_02_180906) do
     t.index ["user_id"], name: "index_parks_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "password_digest"
-    t.string "api_key"
+  create_table 'users', force: :cascade do |t|
+    t.string 'email'
+    t.string 'password_digest'
+    t.string 'api_key'
   end
 
   add_foreign_key "parks", "users"

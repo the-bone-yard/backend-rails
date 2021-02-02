@@ -10,8 +10,10 @@ Rails.application.routes.draw do
       post 'user', to: 'user#create'
       delete 'user', to: 'user#destroy'
     end
+    
     namespace :v2 do
       get 'directions', to: 'search#show'
+      get 'park_search', to: 'search#parks'
     end
   end
   get '/', to: 'welcome#index'

@@ -30,9 +30,7 @@ RSpec.describe 'Parks' do
       'api_key': ENV['API']
     }
 
-    response = conn('/api/v1/park').post do |request|
-      request.body = body
-    end
+    response = conn('/api/v1/park').post { |request| request.body = body }
     json = JSON.parse(response.body)
     expect(json['name']).to eq(body[:name])
     expect(json['formatted_address']).to eq(body[:formatted_address])
@@ -46,7 +44,6 @@ RSpec.describe 'Parks' do
     response2 = conn('/api/v1/user').delete
     expect(response2.class).to eq(Faraday::Response)
   end
-
   it 'can delete a Park with the appropriate API key' do
     body1 = {
       email: '123@email.com',
@@ -87,6 +84,13 @@ RSpec.describe 'Parks' do
     response4 = conn('/api/v1/user').delete
     expect(response4.class).to eq(Faraday::Response)
   end
+end
+
+describe 'Parks' do
+  def conn(uri)
+    url = ENV['RAILS_ENGINE_DOMAIN'] + uri
+    Faraday.new(url)
+  end
 
   it 'can get all Parks with API key' do
     body1 = {
@@ -113,15 +117,20 @@ RSpec.describe 'Parks' do
       request.body = body1
     end
 
+<<<<<<< HEAD
     body2 = {
       'api_key': ENV['API']
     }
+=======
+    body = { 'api_key': '2gymzMNPQSJqrkExBLz9Mgtt' }
+>>>>>>> 7b56eadc6a089a9b05f6f7eb98c1c2ab1c8a7a5e
 
     response = conn('/api/v1/park/all').get do |req|
       req.body = body2
     end
 
     json = JSON.parse(response.body, symbolize_names: true)
+<<<<<<< HEAD
 
     expect(json.keys).to eq(%i[data])
     expect(json[:data][0].keys).to eq(%i[id type attributes])
@@ -130,5 +139,10 @@ RSpec.describe 'Parks' do
     end
     response = conn('/api/v1/user').delete
     expect(response.class).to eq(Faraday::Response)
+=======
+    keys = %i[name email formatted_address opening_hours photo rating lat lng]
+    expect(json.keys).to eq(%i[parks])
+    json[:parks].each { |park| expect(park.keys).to eq(keys) }
+>>>>>>> 7b56eadc6a089a9b05f6f7eb98c1c2ab1c8a7a5e
   end
 end

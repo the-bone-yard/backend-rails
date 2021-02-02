@@ -17,7 +17,7 @@ module Api
       end
 
       def index
-        render json: ParkSerializer.new(Park.all) # if Park.check_key(all_park_params[:api_key])
+        render json: UserParkSerializer.to_hash(Park.all) # if Park.check_key(all_park_params[:api_key])
       end
 
       private

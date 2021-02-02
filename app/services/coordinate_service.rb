@@ -22,7 +22,11 @@ class CoordinateService
     lat = data[:locations][0][:latLng][:lat].to_s
     lng = data[:locations][0][:latLng][:lng].to_s
     city = data[:providedLocation][:location].split(',')[0]
-    area = data[:providedLocation][:location].split(',')[1]
+    if data[:providedLocation][:location].split(',').length == 1
+      area = 'no area'
+    else
+      area = data[:providedLocation][:location].split(',')[1]
+    end
     Coordinates.create!(city: city, area: area, lat: lat, lng: lng)
   end
 end

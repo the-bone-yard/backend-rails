@@ -2,9 +2,11 @@
 
 class Park < ApplicationRecord
   validates_presence_of :name, :formatted_address, :email, :lat, :lng, :photo, :rating, :opening_hours
+  belongs_to :user
 
   def self.new_park(data)
-    if check_key(data[:api_key])
+    user = User.find_by(email: data[:email])
+    if check_key(data[:api_key]) && !user.nil?
       Park.create!({
                      name: data[:name],
                      formatted_address: data[:formatted_address],
@@ -13,10 +15,13 @@ class Park < ApplicationRecord
                      lng: data[:lng],
                      email: data[:email],
                      photo: data[:photo],
-                     opening_hours: data[:opening_hours]
+                     opening_hours: data[:opening_hours],
+                     user_id: user.id
                    })
-    else
+    elsif !find_user(data[:email]).nil?
       'API KEY ERROR'
+    else
+      'NO USER'
     end
   end
 

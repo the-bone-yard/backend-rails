@@ -3,20 +3,19 @@
 class User < ApplicationRecord
   validates_presence_of :email, :password, :api_key
   validates_uniqueness_of :email
+  has_many :parks
   before_validation :set_api_key
   has_secure_password
 
   def self.new_user(data)
-    if check_key(data[:api_key])
-      User.create!({email: data[:email], password: data[:password]})
-    end
+    User.create!({ email: data[:email], password: data[:password] }) if check_key(data[:api_key])
   end
-
-  private
 
   def self.check_key(key)
     key == ENV['API']
   end
+
+  private
 
   def set_api_key
     self.api_key = ApiKey.generator

@@ -9,7 +9,8 @@ module Api
       end
 
       def destroy
-        User.last.delete
+        Park.delete_all
+        User.delete_all
       end
 
       private

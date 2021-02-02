@@ -13,43 +13,8 @@ RSpec.describe Park, type: :model do
     it { should validate_presence_of :lat }
     it { should validate_presence_of :lng }
   end
-end
 
-RSpec.describe User, type: :model do
-  describe '.check_key()' do
-    it 'can check API key and create a Park if validated' do
-      expect(Park.all).to be_empty
-      data = {
-        formatted_address: '1234 Nope',
-        name: 'The Dude Ranch',
-        rating: '33',
-        lat: '33.098',
-        lng: '-104.55',
-        email: '222@email.com',
-        photo: 'no photos please',
-        opening_hours: 'yes',
-        api_key: ENV['API']
-      }
-
-      expect { Park.new_park(data) }.to change { Park.all.count }.by(1)
-    end
-
-    it 'can check API key and send back an error if not validated' do
-      expect(Park.all).to be_empty
-      data = {
-        formatted_address: '1234 Nope',
-        name: 'The Dude Ranch',
-        rating: '33',
-        lat: '33.098',
-        lng: '-104.55',
-        email: '222@email.com',
-        photo: 'no photos please',
-        opening_hours: 'yes',
-        api_key: '2'
-      }
-      result = Park.new_park(data)
-
-      expect(result).to eq('API KEY ERROR')
-    end
+  describe 'relationships' do
+    it { should belong_to :user }
   end
 end

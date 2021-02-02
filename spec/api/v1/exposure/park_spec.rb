@@ -117,32 +117,21 @@ describe 'Parks' do
       request.body = body1
     end
 
-<<<<<<< HEAD
     body2 = {
       'api_key': ENV['API']
     }
-=======
-    body = { 'api_key': '2gymzMNPQSJqrkExBLz9Mgtt' }
->>>>>>> 7b56eadc6a089a9b05f6f7eb98c1c2ab1c8a7a5e
 
     response = conn('/api/v1/park/all').get do |req|
       req.body = body2
     end
 
     json = JSON.parse(response.body, symbolize_names: true)
-<<<<<<< HEAD
 
-    expect(json.keys).to eq(%i[data])
-    expect(json[:data][0].keys).to eq(%i[id type attributes])
-    json[:data].each do |park|
-      expect(park[:attributes].keys).to eq(%i[id name email formatted_address lat lng photo rating])
+    expect(json.keys).to eq(%i[parks])
+    json[:parks].each do |park|
+      expect(park.keys).to eq(%i[name email formatted_address opening_hours photo rating lat lng])
     end
     response = conn('/api/v1/user').delete
     expect(response.class).to eq(Faraday::Response)
-=======
-    keys = %i[name email formatted_address opening_hours photo rating lat lng]
-    expect(json.keys).to eq(%i[parks])
-    json[:parks].each { |park| expect(park.keys).to eq(keys) }
->>>>>>> 7b56eadc6a089a9b05f6f7eb98c1c2ab1c8a7a5e
   end
 end

@@ -22,16 +22,17 @@ end
 describe Park, type: :model do
   describe 'methods' do
     it 'new_park() with incorrect API key' do
+      user = User.create!({email: 'email@fake.com', password: '1111'})
       data = {
-        'name' => 'fake park',
-        'formatted_address' => 'fake address',
-        'rating' => 'rating',
-        'lat' => 'lat',
-        'lng' => 'lng',
-        'email' => 'email@fake.com',
-        'photo' => 'no photo',
-        'opening_hours' => 'open',
-        'api_key' => '222'
+        name: 'fake park',
+        formatted_address: 'fake address',
+        rating: 'rating',
+        lat: 'lat',
+        lng: 'lng',
+        email: 'email@fake.com',
+        photo: 'no photo',
+        opening_hours: 'open',
+        api_key: '222'
       }
       result = Park.new_park(data)
       expect(result).to eq('API KEY ERROR')
@@ -41,17 +42,37 @@ end
 
 describe Park, type: :model do
   describe 'methods' do
+    it 'new_park() with API key but no user' do
+      data = {
+        name: 'fake park',
+        formatted_address: 'fake address',
+        rating: 'rating',
+        lat: 'lat',
+        lng: 'lng',
+        email: 'email@fake.com',
+        photo: 'no photo',
+        opening_hours: 'open',
+        api_key: '222'
+      }
+      result = Park.new_park(data)
+      expect(result).to eq('NO USER')
+    end
+  end
+end
+
+describe Park, type: :model do
+  describe 'methods' do
     it 'new_park() with correct API key' do
       data = {
-        'name' => 'fake park',
-        'formatted_address' => 'fake address',
-        'rating' => 'rating',
-        'lat' => 'lat',
-        'lng' => 'lng',
-        'email' => 'email@fake.com',
-        'photo' => 'no photo',
-        'opening_hours' => 'open',
-        'api_key' => (ENV['API']).to_s
+        name: 'fake park',
+        formatted_address: 'fake address',
+        rating: 'rating',
+        lat: 'lat',
+        lng: 'lng',
+        email: 'email@fake.com',
+        photo: 'no photo',
+        opening_hours: 'open',
+        api_key: (ENV['API']).to_s
       }
       result = Park.new_park(data)
       expect(result).to_not eq('API KEY ERROR')

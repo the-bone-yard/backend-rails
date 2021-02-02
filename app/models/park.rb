@@ -18,7 +18,7 @@ class Park < ApplicationRecord
                      opening_hours: data[:opening_hours],
                      user_id: user.id
                    })
-    elsif !find_user(data[:email]).nil?
+    elsif !user.nil?
       'API KEY ERROR'
     else
       'NO USER'

@@ -14,7 +14,9 @@ class ParkSerializer
         'formatted_address' => park.formatted_address,
         'opening_hours' => park.opening_hours,
         'photo' => park.photo,
-        'rating' => park.rating
+        'rating' => park.rating,
+        'lat' => park.lat,
+        'lng' => park.lng
       }
     end
   end

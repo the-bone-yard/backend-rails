@@ -19,7 +19,13 @@ RSpec.describe 'Directions' do
     expect(json).to be_an(Array)
     expect(json).to_not be_empty
   end
+end
 
+RSpec.describe 'Directions' do
+  def conn(uri)
+    url = ENV['RAILS_ENGINE_DOMAIN'] + uri
+    Faraday.new(url)
+  end
   it 'endpoint can provide array of directions with city/state as input' do
     current = 'denver,co'
     to = 'boulder,co'

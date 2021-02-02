@@ -8,6 +8,16 @@ module Api
           render json: DirectionsService.only_narration(params['current'], params['to']).to_json
         end
       end
+
+      def parks
+        render json: ParkSerializer.to_hash(PlaceService.get_parks_nearby(location_params)).to_json
+      end
+
+      private
+
+      def location_params
+        params.permit(:data)
+      end
     end
   end
 end

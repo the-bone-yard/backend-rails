@@ -6,8 +6,7 @@ class CoordinateService
   end
 
   def self.get_coords(info)
-    coords = Coordinates.find_coords(info)
-    if coords.empty?
+    if Coordinates.find_coords(info).empty?
       response = conn.get('geocoding/v1/address') do |req|
         req.params[:key] = ENV['MAP_KEY']
         req.params[:location] = info
@@ -15,7 +14,7 @@ class CoordinateService
       save_coordinates(JSON.parse(response.body, symbolize_names: true))
       Coordinates.last
     else
-      coords[0]
+      Coordinates.find_coords(info)[0]
     end
   end
 

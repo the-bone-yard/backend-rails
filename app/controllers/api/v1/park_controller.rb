@@ -5,7 +5,7 @@ module Api
     class ParkController < ApplicationController
       def create
         trip = Park.new_park(park_params)
-        render json: Park.last if trip != 'API KEY ERROR'
+        render json: Park.last if trip != 'API KEY ERROR' || trip != 'NO USER'
       end
 
       def destroy
@@ -17,7 +17,7 @@ module Api
       end
 
       def index
-        render json: ParkSerializer.new(Park.all) #if Park.check_key(all_park_params[:api_key])
+        render json: ParkSerializer.new(Park.all) # if Park.check_key(all_park_params[:api_key])
       end
 
       private

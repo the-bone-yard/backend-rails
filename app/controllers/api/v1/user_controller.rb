@@ -17,6 +17,11 @@ module Api
         render json: User.check_credentials(user_params)
       end
 
+      def index
+        users = User.check_key(user_params[:api_key])
+        render json: User.all if users
+      end
+
       private
 
       # def all_park_params

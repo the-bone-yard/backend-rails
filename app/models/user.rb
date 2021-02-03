@@ -18,7 +18,7 @@ class User < ApplicationRecord
   def self.check_credentials(data)
     user = User.find_by(email: data[:email])
     if user.nil? || !user.authenticate(data[:password])
-      'CREDENTIALS INCORRECT'
+      'CREDENTIALS INCORRECT'.to_json
     else
       user
     end

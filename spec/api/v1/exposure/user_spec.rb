@@ -45,7 +45,7 @@ describe 'User API' do
         email: '224@email.com',
         password: '222'
       }
-      response2 = conn('/api/v1/user/login').get do |req|
+      response2 = conn('/api/v1/user/login').post do |req|
         req.body = login_user
       end
       user_logged_in = JSON.parse(response2.body, symbolize_names: true)

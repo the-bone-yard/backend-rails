@@ -15,6 +15,15 @@ class User < ApplicationRecord
     key == ENV['API']
   end
 
+  def self.check_credentials(data)
+    user = User.find_by(email: data[:email])
+    if user.nil? || !user.authenticate(data[:password])
+      'CREDENTIALS INCORRECT'
+    else
+      user
+    end
+  end
+
   private
 
   def set_api_key

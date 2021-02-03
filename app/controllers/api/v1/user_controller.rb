@@ -13,6 +13,10 @@ module Api
         User.delete_all
       end
 
+      def show
+        render json: User.check_credentials(user_params)
+      end
+
       private
 
       # def all_park_params

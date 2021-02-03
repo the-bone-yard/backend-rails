@@ -22,7 +22,7 @@ end
 describe Park, type: :model do
   describe 'methods' do
     it 'new_park() with incorrect API key' do
-      user = User.create!({email: 'email@fake.com', password: '1111'})
+      User.create!({ email: 'email@fake.com', password: '1111' })
       data = {
         name: 'fake park',
         formatted_address: 'fake address',

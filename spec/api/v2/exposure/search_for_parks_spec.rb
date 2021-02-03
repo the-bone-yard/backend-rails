@@ -12,11 +12,10 @@ describe 'api/v2/park_search' do
       'data': '39.742043,-104.991531'
     }
 
-    response = conn('/api/v2/park_search').get do |request|
+    response = conn('/api/v2/park_search').post do |request|
       request.body = body
     end
     json = JSON.parse(response.body, symbolize_names: true)
-
     json[:parks].each do |park|
       expect(park[:rating].instance_of?(Float)).to eq(true)
       expect(park[:formatted_address]).to be_a(String)
@@ -35,7 +34,7 @@ describe 'api/v2/park_search' do
       'data': 'denver,co'
     }
 
-    response = conn('/api/v2/park_search').get do |request|
+    response = conn('/api/v2/park_search').post do |request|
       request.body = body
     end
     json = JSON.parse(response.body, symbolize_names: true)

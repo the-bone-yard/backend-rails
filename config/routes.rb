@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       get 'park/all', to: 'park#index'
       post 'user', to: 'user#create'
       delete 'user', to: 'user#destroy'
+      post '/user/login', to: 'user#show'
+      get '/user/all', to: 'user#index'
     end
 
     namespace :v2 do

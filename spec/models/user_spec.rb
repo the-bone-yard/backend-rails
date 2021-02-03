@@ -38,3 +38,26 @@ RSpec.describe User, type: :model do
     end
   end
 end
+
+RSpec.describe User, type: :model do
+  describe '.check_credentials()' do
+    it 'can check credentials are correct (with correct info)' do
+      User.create!({ email: '444@email.com', password: 'tttt' })
+      body = {
+        email: '444@email.com',
+        password: 'tttt'
+      }
+      result = User.check_credentials(body)
+      expect(result).to eq(User.last)
+    end
+    it 'can send back error message with incorrect info' do
+      User.create!({ email: '444@email.com', password: 'tttt' })
+      body = {
+        email: '444@email.com',
+        password: '2222s'
+      }
+      result = User.check_credentials(body)
+      expect(result).to eq('CREDENTIALS INCORRECT')
+    end
+  end
+end
